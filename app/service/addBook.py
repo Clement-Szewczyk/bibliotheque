@@ -5,7 +5,6 @@ class AddBookDialog(QDialog):
 
     def __init__(self, book_tab=None):
         super().__init__()
-        print("INIT ADD BOOK")
         self.book_tab = book_tab
         self.file_manager = FileManager(book_tab=book_tab)
         self.setWindowTitle("Ajouter un livre")
@@ -14,6 +13,8 @@ class AddBookDialog(QDialog):
         self.input_title = QLineEdit()
         self.label_author = QLabel("Auteur:")
         self.input_author = QLineEdit()
+        self.label_genre = QLabel("Genre:")
+        self.input_genre = QLineEdit()
         self.label_year = QLabel("Année de publication:")
         self.input_year = QLineEdit()
         self.label_isbn = QLabel("ISBN:")
@@ -27,6 +28,8 @@ class AddBookDialog(QDialog):
         self.layout.addWidget(self.input_title)
         self.layout.addWidget(self.label_author)
         self.layout.addWidget(self.input_author)
+        self.layout.addWidget(self.label_genre)
+        self.layout.addWidget(self.input_genre)
         self.layout.addWidget(self.label_year)
         self.layout.addWidget(self.input_year)
         self.layout.addWidget(self.label_isbn)
@@ -41,14 +44,15 @@ class AddBookDialog(QDialog):
     def add_book(self):
         title = self.input_title.text()
         author = self.input_author.text()
+        genre = self.input_genre.text()
         year = self.input_year.text()
         isbn = self.input_isbn.text()
         sale = self.input_sale.isChecked()
-        if title == "" or author == "" or year == "" or isbn == "":
+        if title == "" or author == "" or genre == "" or year == "" or isbn == "":
             QMessageBox.warning(self, "Erreur", "Veuillez remplir tous les champs")
         else:
             #ajouter le livre a la base de donnee
-            self.file_manager.add_book(title, author, year, isbn, sale)
+            self.file_manager.add_book(title, author, genre, year, isbn, sale)
             #Fermer la fenetre
             self.accept()
 

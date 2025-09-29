@@ -22,11 +22,12 @@ class FileManager:
         with open(self.pathfile, "w") as f:
             json.dump(self.books, f, indent=4)
 
-    def add_book(self, title, author, year, isbn, sale):
+    def add_book(self, title, author, genre, year, isbn, sale):
         #print(f"Book added: {title}, {author}, {year}, {isbn}, Read: {read}")
         new_book = {
             "title": title,
             "author": author,
+            "genre": genre,
             "year": year,
             "isbn": isbn,
             "sale": sale
