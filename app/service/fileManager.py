@@ -2,10 +2,11 @@ import json
 
 class FileManager:
 
-    def __init__(self):
+    def __init__(self, book_tab=None):
         #print("FileManager initialized")
         self.pathfile = "./data.json"
         self.load_books()
+        self.book_tab = book_tab
 
     def load_books(self):
         try:
@@ -15,21 +16,25 @@ class FileManager:
             self.books = []
         except json.JSONDecodeError:
             self.books = []
+        return self.books
     
     def save_books(self):
         with open(self.pathfile, "w") as f:
             json.dump(self.books, f, indent=4)
 
-    def add_book(self, title, author, year, isbn, read):
+    def add_book(self, title, author, year, isbn, sale):
         #print(f"Book added: {title}, {author}, {year}, {isbn}, Read: {read}")
         new_book = {
             "title": title,
             "author": author,
             "year": year,
             "isbn": isbn,
-            "read": read
+            "sale": sale
         }
         self.books.append(new_book)
         self.save_books()
+        if self.book_tab:
+            self.book_tab.load_books()
+
 
 

@@ -281,3 +281,7 @@ assets/cache/*
 # Virtual environment (if created inside project)
 bibliotheque_env/
 env_bibliotheque/
+
+
+# data.json file
+*.json
