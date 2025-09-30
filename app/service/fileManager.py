@@ -70,5 +70,15 @@ class FileManager:
         if self.book_tab:
             self.book_tab.load_books()
 
+    def remove_book(self, book_id):
+        """Remove a book by its ID"""
+        self.books = [book for book in self.books if book.id != book_id]
+        self.save_books()
+        if self.book_tab:
+            self.book_tab.load_books()
+
+    def modify_book(self, book_id=None):
+        print(f"Modify book with ID: {book_id}")
+        pass
 
 
