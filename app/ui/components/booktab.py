@@ -35,25 +35,26 @@ class BookTab(QWidget):
 
         if not books:
             self.bookTable.setRowCount(0)
-            self.bookTable.setColumnCount(6)
-            self.bookTable.setHorizontalHeaderLabels(["Titre", "Auteur", "Genre", "Année", "ISBN", "En Vente"])
+            self.bookTable.setColumnCount(7)  # Add one column for ID
+            self.bookTable.setHorizontalHeaderLabels(["ID", "Titre", "Auteur", "Genre", "Année", "ISBN", "En Vente"])
             return
         
         # Configuration de la table
         self.bookTable.setRowCount(len(books))
-        self.bookTable.setColumnCount(6)
-        self.bookTable.setHorizontalHeaderLabels(["Titre", "Auteur", "Genre", "Année", "ISBN", "En Vente"])
+        self.bookTable.setColumnCount(7)  # Add one column for ID
+        self.bookTable.setHorizontalHeaderLabels(["ID", "Titre", "Auteur", "Genre", "Année", "ISBN", "En Vente"])
         
         # Remplissage des données
         for row, book in enumerate(books):
-            self.bookTable.setItem(row, 0, QTableWidgetItem(book.get('title', '')))
-            self.bookTable.setItem(row, 1, QTableWidgetItem(book.get('author', '')))
-            self.bookTable.setItem(row, 2, QTableWidgetItem(book.get('genre', '')))
-            self.bookTable.setItem(row, 3, QTableWidgetItem(str(book.get('year', ''))))
-            self.bookTable.setItem(row, 4, QTableWidgetItem(book.get('isbn', '')))
+            self.bookTable.setItem(row, 0, QTableWidgetItem(str(book.get('id', ''))))  # ID column
+            self.bookTable.setItem(row, 1, QTableWidgetItem(book.get('title', '')))
+            self.bookTable.setItem(row, 2, QTableWidgetItem(book.get('author', '')))
+            self.bookTable.setItem(row, 3, QTableWidgetItem(book.get('genre', '')))
+            self.bookTable.setItem(row, 4, QTableWidgetItem(str(book.get('year', ''))))
+            self.bookTable.setItem(row, 5, QTableWidgetItem(book.get('isbn', '')))
             read_item = QTableWidgetItem("Oui" if book.get('sale', False) else "Non")
             read_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-            self.bookTable.setItem(row, 5, read_item)
+            self.bookTable.setItem(row, 6, read_item)
 
         # Ajustement automatique de la largeur des colonnes
         self.bookTable.resizeColumnsToContents()
