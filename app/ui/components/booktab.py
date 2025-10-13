@@ -3,6 +3,7 @@ from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QListWidget, QTableWidget, QP
 from PyQt6.QtCore import Qt
 
 from app.service.fileManager import FileManager
+from app.service.modify_book import ModifyBook
 
 class BookTab(QWidget):
     def __init__(self, parent=None):
@@ -97,8 +98,9 @@ class BookTab(QWidget):
 
     def modify_book(self, book_id):
         """Modify a book by its ID"""
-        print(f"Modify book with ID: {book_id}")
-        self.file_manager.modify_book(book_id)
+        self.modify_window = ModifyBook(book_id)
+        self.modify_window.uiModifyBook()
+        self.refresh_table()
         
     def refresh_table(self):
         """Force refresh the table data"""

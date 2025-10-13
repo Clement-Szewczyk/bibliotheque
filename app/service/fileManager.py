@@ -53,6 +53,12 @@ class FileManager:
             self.books = []
         return [book.to_dict() for book in self.books]  # Return as dicts for UI compatibility
     
+    def load_book_id(self, book_id):
+        for book in self.books:
+            if book.id == book_id:
+                return book.to_dict()
+        return None
+    
     def save_books(self):
         # Convert Book objects to dictionaries before saving
         books_data = [book.to_dict() for book in self.books]
@@ -77,8 +83,19 @@ class FileManager:
         if self.book_tab:
             self.book_tab.load_books()
 
-    def modify_book(self, book_id=None):
-        print(f"Modify book with ID: {book_id}")
-        pass
+    def modify_book(self, book_id, title, author, genre, year, isbn, sale):
+        for book in self.books : 
+            if book_id == book.id:
+                book.title = title
+                book.author = author
+                book.genre = genre
+                book.year = year
+                book.isbn = isbn
+                book.sale = sale
+
+                self.save_books()
+                return
+            else : 
+                return "Pas de livre correspondant"
 
 
