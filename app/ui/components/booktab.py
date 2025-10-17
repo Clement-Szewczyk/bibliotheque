@@ -4,6 +4,7 @@ from PyQt6.QtCore import Qt
 
 from app.service.fileManager import FileManager
 from app.service.modify_book import ModifyBook
+from app.service.addBook import AddBookDialog
 
 class BookTab(QWidget):
     def __init__(self, parent=None):
@@ -27,10 +28,15 @@ class BookTab(QWidget):
         button_layout.addWidget(self.add_button)
 
         self.remove_button = QPushButton("Supprimer le livre sélectionné")
-        self.remove_button.clicked.connect(self.remove_selected_book)
+        self.remove_button.clicked.connect(self.addBook)
         button_layout.addWidget(self.remove_button)
 
         self.layout.addLayout(button_layout)
+
+    def addBook(self):
+        self.add_window = AddBookDialog()
+        self.add_window.show()
+        self.refresh_table()
 
     def load_books(self):
         # Configuration des colonnes de la table
