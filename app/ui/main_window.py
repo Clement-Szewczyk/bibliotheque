@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QStackedWidget, QLabel, QPushButton, QTabWidget)
+from PyQt6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QStackedWidget, QLabel, QPushButton, QTabWidget, QStyleFactory)
 from PyQt6.QtGui import QGuiApplication
 
 from app.ui.components.menubar import Menubar

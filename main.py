@@ -1,12 +1,12 @@
 import sys
-from PyQt6.QtWidgets import QApplication
+from PyQt6.QtWidgets import (QApplication, QStyleFactory)
 from app.start.splash import Splash
 from app.start.startup_dialog import StartupDialog
 from app.ui.main_window import MainWindow
 
 def main():
     app = QApplication(sys.argv)
-
+    app.setStyle("Fusion")
     # Splash screen
     splash = Splash()
     splash.show()

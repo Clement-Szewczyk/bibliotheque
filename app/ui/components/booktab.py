@@ -24,7 +24,7 @@ class BookTab(QWidget):
         button_layout = QHBoxLayout()
         
         self.add_button = QPushButton("Ajouter un livre")
-        self.add_button.clicked.connect(self.file_manager.add_book)
+        self.add_button.clicked.connect(self.addBook)
         button_layout.addWidget(self.add_button)
 
         self.remove_button = QPushButton("Supprimer le livre sélectionné")
@@ -34,9 +34,8 @@ class BookTab(QWidget):
         self.layout.addLayout(button_layout)
 
     def addBook(self):
-        self.add_window = AddBookDialog()
-        self.add_window.show()
-        self.refresh_table()
+        dialog = AddBookDialog(self)
+        dialog.exec()
 
     def load_books(self):
         # Configuration des colonnes de la table
