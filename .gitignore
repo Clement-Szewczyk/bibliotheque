@@ -199,6 +199,7 @@ Desktop.ini
 
 # Application specific files
 # Database files
+data.json
 data/*.db
 data/*.sqlite
 data/*.sqlite3
