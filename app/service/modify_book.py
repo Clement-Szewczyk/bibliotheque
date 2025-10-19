@@ -1,21 +1,20 @@
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QCheckBox
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QPushButton, QMessageBox, QCheckBox,QDialog
 
 from app.service.fileManager import FileManager
 
-class ModifyBook:
+class ModifyBook(QDialog):
 
-    def __init__(self, id):
+    def __init__(self, id, booktab=None):
+        super().__init__()
         self.id = id
-        self.file_manager = FileManager()
+        self.booktable = booktab
+        self.file_manager = FileManager(book_tab=self.booktable)
         self.book_data = self.file_manager.load_book_id(self.id)
         
-        print(f"ModifyBook initialized for book ID: {self.id} with data: {self.book_data}")
+        #print(f"ModifyBook initialized for book ID: {self.id} with data: {self.book_data}")
         
-
-    
-    def uiModifyBook(self):
-        self.window = QWidget()
-        self.window.setWindowTitle("Modifier le livre")
+        #UI
+        self.setWindowTitle("Modifier le livre")
         self.layout = QVBoxLayout()
         self.label_title = QLabel("Titre:")
         self.input_title = QLineEdit()
@@ -36,6 +35,8 @@ class ModifyBook:
         self.input_sale = QCheckBox()
         self.input_sale.setChecked(self.book_data.get('sale', False))
         self.button_modify = QPushButton("Modifier")
+        
+        self.setLayout(self.layout)
         self.layout.addWidget(self.label_title)
         self.layout.addWidget(self.input_title)
         self.layout.addWidget(self.label_author)
@@ -49,15 +50,12 @@ class ModifyBook:
         self.layout.addWidget(self.label_sale)
         self.layout.addWidget(self.input_sale)
         self.layout.addWidget(self.button_modify)
-
-
-
         self.button_modify.clicked.connect(self.call_file)
-        self.window.setLayout(self.layout)
-        self.window.show()
-        return self.window
-    
+
+
+
     def call_file(self):
+        print("Call")
         title = self.input_title.text()
         author = self.input_author.text()
         genre = self.input_genre.text()
@@ -70,7 +68,7 @@ class ModifyBook:
             #modifier le livre a la base de donnee
             self.file_manager.modify_book(self.id, title, author, genre, year, isbn, sale)
             #Fermer la fenetre
-            self.window.close()
+            self.accept()
     
         
         

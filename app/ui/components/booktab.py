@@ -103,9 +103,8 @@ class BookTab(QWidget):
 
     def modify_book(self, book_id):
         """Modify a book by its ID"""
-        self.modify_window = ModifyBook(book_id)
-        self.modify_window.uiModifyBook()
-        self.refresh_table()
+        modify_window = ModifyBook(book_id, self)
+        modify_window.exec()
         
     def refresh_table(self):
         """Force refresh the table data"""

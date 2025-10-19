@@ -84,18 +84,20 @@ class FileManager:
             self.book_tab.load_books()
 
     def modify_book(self, book_id, title, author, genre, year, isbn, sale):
+        
         for book in self.books : 
-            if book_id == book.id:
+
+            if book.id == book_id:
+ 
                 book.title = title
                 book.author = author
                 book.genre = genre
                 book.year = year
                 book.isbn = isbn
                 book.sale = sale
-
                 self.save_books()
-                return
-            else : 
-                return "Pas de livre correspondant"
+                if self.book_tab:
+                    self.book_tab.load_books()
+        
 
 
